@@ -1,1 +1,1 @@
-web: java -jar target/todo-backend-axon-0.0.1-SNAPSHOT.jar
+web: java -jar -Dserver.port=$PORT target/todo-backend-axon-0.0.1-SNAPSHOT.jar
