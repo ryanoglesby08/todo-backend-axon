@@ -22,6 +22,6 @@ public class TodoList {
 
     @EventHandler
     public void addItem(ToDoItemCreatedEvent event) {
-        todos.add(new ToDoItem(event.getTodoId(), event.getDescription()));
+        todos.add(new ToDoItem(event.getTodoId(), event.getTitle()));
     }
 }

@@ -2,15 +2,13 @@ package todo;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import todo.todoitem.CreateToDoItemCommand;
+import org.springframework.web.bind.annotation.*;
 import todo.todoitem.ToDoItem;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
+@RequestMapping("/todos")
 public class ToDoController {
     private final CommandGateway commandGateway;
     private final TodoList list;
@@ -21,17 +19,18 @@ public class ToDoController {
         this.list = list;
     }
 
-    @RequestMapping("/")
-    String home() {
+    @RequestMapping(method = RequestMethod.GET)
+    public String index() {
         List<ToDoItem> items = list.all();
 
-        return items.get(0).getDescription();
+        return items.get(0).getTitle();
     }
 
-    @RequestMapping("/create")
-    String create() {
-        commandGateway.send(new CreateToDoItemCommand(UUID.randomUUID().toString(), "Learn Spring + Axon"));
-
-        return "Created";
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
+    public ToDoItem create(@RequestBody ToDoItem todoItem) {
+//        commandGateway.send(new CreateToDoItemCommand(UUID.randomUUID().toString(), "Learn Spring + Axon"));
+        return todoItem;
+//        return "Created";
     }
 }

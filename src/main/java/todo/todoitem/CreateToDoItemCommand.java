@@ -6,18 +6,18 @@ public class CreateToDoItemCommand {
 
     @TargetAggregateIdentifier
     private final String todoId;
-    private final String description;
+    private final String title;
 
-    public CreateToDoItemCommand(String todoId, String description) {
+    public CreateToDoItemCommand(String todoId, String title) {
         this.todoId = todoId;
-        this.description = description;
+        this.title = title;
     }
 
     public String getTodoId() {
         return todoId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTitle() {
+        return title;
     }
 }

@@ -7,7 +7,7 @@ import todo.todoitem.ToDoItemCreatedEvent;
 public class TodoEventHandler {
     @EventHandler
     public void handle(ToDoItemCreatedEvent event) {
-        System.out.println("Something else to do! " + event.getDescription() + " (" + event.getTodoId() + ")");
+        System.out.println("Something else to do! " + event.getTitle() + " (" + event.getTodoId() + ")");
     }
 
     @EventHandler

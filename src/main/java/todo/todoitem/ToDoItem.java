@@ -1,15 +1,24 @@
 package todo.todoitem;
 
-public class ToDoItem extends ToDoItemAggregate {
-    private final String id;
-    private final String description;
+public class ToDoItem {
+    private String id;
+    private String title;
 
-    public ToDoItem(String id, String description) {
+    public ToDoItem() {
+    }
+
+    public ToDoItem(String id, String title) {
         this.id = id;
-        this.description = description;
+        this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getId() { return id; }
+
+    public String getTitle() {
+        return title;
     }
+
+    public void setId(String id) { this.id = id; }
+
+    public void setTitle(String title) { this.title = title; }
 }
