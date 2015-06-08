@@ -38,6 +38,7 @@ public class ToDoController {
 
     @RequestMapping(method = RequestMethod.DELETE)
     public String delete() {
+        list.clear();
         return "Deleted";
     }
 

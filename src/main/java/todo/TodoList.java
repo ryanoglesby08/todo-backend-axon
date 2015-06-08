@@ -34,4 +34,8 @@ public class TodoList {
 
         return null;
     }
+
+    public void clear() {
+        todos.clear();
+    }
 }
