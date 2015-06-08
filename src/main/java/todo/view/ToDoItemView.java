@@ -32,5 +32,5 @@ public class ToDoItemView {
         return todoUrl;
     }
 
-
+    public Integer getOrder() { return todo.getOrder(); }
 }

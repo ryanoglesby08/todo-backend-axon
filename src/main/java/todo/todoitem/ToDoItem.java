@@ -7,16 +7,15 @@ public class ToDoItem {
     private String id;
     private String title;
     private boolean completed;
+    private Integer order;
 
     @JsonCreator
-    public ToDoItem(@JsonProperty("title") String title, @JsonProperty("completed") boolean completed) {
+    public ToDoItem(@JsonProperty("title") String title,
+                    @JsonProperty("completed") boolean completed,
+                    @JsonProperty("order") Integer order) {
         this.title = title;
         this.completed = completed;
-    }
-
-    public ToDoItem(String id, String title) {
-        this(title, false);
-        this.id = id;
+        this.order = order;
     }
 
     public String getId() { return id; }
@@ -37,6 +36,14 @@ public class ToDoItem {
         this.completed = completed;
     }
 
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,7 +52,6 @@ public class ToDoItem {
         ToDoItem toDoItem = (ToDoItem) o;
 
         return id.equals(toDoItem.id);
-
     }
 
     @Override

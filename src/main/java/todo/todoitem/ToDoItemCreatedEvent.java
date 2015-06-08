@@ -2,18 +2,18 @@ package todo.todoitem;
 
 public class ToDoItemCreatedEvent {
     private final String todoId;
-    private final String title;
+    private final ToDoItem todo;
 
-    public ToDoItemCreatedEvent(String todoId, String title) {
+    public ToDoItemCreatedEvent(String todoId, ToDoItem todo) {
         this.todoId = todoId;
-        this.title = title;
+        this.todo = todo;
     }
 
     public String getTodoId() {
         return todoId;
     }
 
-    public String getTitle() {
-        return title;
+    public ToDoItem getTodo() {
+        return todo;
     }
 }

@@ -45,12 +45,12 @@ public class ToDoController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public DeferredResult<ToDoItemView> create(@RequestBody ToDoItem todo, HttpServletRequest request) {
+    public DeferredResult<ToDoItemView> create(@RequestBody ToDoItem todo) {
         DeferredResult<ToDoItemView> result = new DeferredResult<ToDoItemView>();
         String id = UUID.randomUUID().toString();
 
         eventHandler.linkResultWithEvent(id, result);
-        commandGateway.send(new CreateToDoItemCommand(id, todo.getTitle()));
+        commandGateway.send(new CreateToDoItemCommand(id, todo));
 
         return result;
     }

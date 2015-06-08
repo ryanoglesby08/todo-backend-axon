@@ -14,7 +14,7 @@ public class ToDoItemAggregate extends AbstractAnnotatedAggregateRoot {
 
     @CommandHandler
     public ToDoItemAggregate(CreateToDoItemCommand command) {
-        apply(new ToDoItemCreatedEvent(command.getTodoId(), command.getTitle()));
+        apply(new ToDoItemCreatedEvent(command.getTodoId(), command.getTodo()));
     }
 
     @CommandHandler

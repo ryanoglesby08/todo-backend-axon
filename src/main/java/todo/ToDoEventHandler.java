@@ -34,10 +34,9 @@ public class ToDoEventHandler {
 
     @EventHandler
     public void handle(ToDoItemCreatedEvent event) {
-        System.out.println("Something else to do! " + event.getTitle() + " (" + event.getTodoId() + ")");
+        ToDoItem todo = event.getTodo();
 
-
-        ToDoItem todo = new ToDoItem(event.getTodoId(), event.getTitle());
+        todo.setId(event.getTodoId());
         todos.add(todo);
 
         finishHttpRequestFor(todo);
@@ -51,12 +50,17 @@ public class ToDoEventHandler {
         ToDoItem updates = event.getTodoUpdates();
 
         String title = updates.getTitle();
-        if(title != null) {
+        if( title != null ) {
             todo.setTitle(title);
         }
 
         boolean completed = updates.isCompleted();
         todo.setCompleted(completed);
+
+        Integer order = updates.getOrder();
+        if( order != null ) {
+            todo.setOrder(order);
+        }
 
         finishHttpRequestFor(todo);
     }
