@@ -22,6 +22,11 @@ public class ToDoItemAggregate extends AbstractAnnotatedAggregateRoot {
         apply(new TodoItemUpdatedEvent(id, command.getTodoUpdates()));
     }
 
+    @CommandHandler
+    public void delete(DeleteToDoItemCommand command) {
+        apply(new ToDoItemDeletedEvent(id));
+    }
+
     @EventHandler
     public void on(ToDoItemCreatedEvent event) {
         this.id = event.getTodoId();

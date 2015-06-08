@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.async.DeferredResult;
 import todo.todoitem.ToDoItem;
 import todo.todoitem.ToDoItemCreatedEvent;
+import todo.todoitem.ToDoItemDeletedEvent;
 import todo.todoitem.TodoItemUpdatedEvent;
 import todo.view.ToDoItemView;
 
@@ -53,6 +54,13 @@ public class ToDoEventHandler {
 
         boolean completed = updates.isCompleted();
         todo.setCompleted(completed);
+
+        finishHttpRequestFor(todo);
+    }
+
+    @EventHandler
+    public void handle(ToDoItemDeletedEvent event) {
+        ToDoItem todo = todos.remove(event.getTodoId());
 
         finishHttpRequestFor(todo);
     }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
 import todo.todoitem.CreateToDoItemCommand;
+import todo.todoitem.DeleteToDoItemCommand;
 import todo.todoitem.ToDoItem;
 import todo.todoitem.UpdateToDoItemCommand;
 import todo.view.ToDoItemView;
@@ -68,6 +69,16 @@ public class ToDoController {
 
         eventHandler.linkResultWithEvent(id, result);
         commandGateway.send(new UpdateToDoItemCommand(id, todoUpdates));
+
+        return result;
+    }
+
+    @RequestMapping(value = TODO_URL, method = RequestMethod.DELETE)
+    public DeferredResult<ToDoItemView> delete(@PathVariable String id) {
+        DeferredResult<ToDoItemView> result = new DeferredResult<ToDoItemView>();
+
+        eventHandler.linkResultWithEvent(id, result);
+        commandGateway.send(new DeleteToDoItemCommand(id));
 
         return result;
     }

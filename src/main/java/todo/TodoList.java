@@ -35,4 +35,10 @@ public class TodoList {
     public void clear() {
         todos.clear();
     }
+
+    public ToDoItem remove(String id) {
+        ToDoItem todo = get(id);
+        todos.remove(todo);
+        return todo;
+    }
 }

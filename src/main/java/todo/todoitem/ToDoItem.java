@@ -36,4 +36,20 @@ public class ToDoItem {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ToDoItem toDoItem = (ToDoItem) o;
+
+        return id.equals(toDoItem.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }
