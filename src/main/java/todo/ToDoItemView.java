@@ -9,7 +9,7 @@ public class ToDoItemView {
     private final String todoUrl;
 
     public static ToDoItemView build(ToDoItem todo, HttpServletRequest request) {
-        String todoUrl = request.getRequestURL() + todo.getId();
+        String todoUrl = request.getRequestURL() + "/" + todo.getId();
         return new ToDoItemView(todo, todoUrl);
     }
 
