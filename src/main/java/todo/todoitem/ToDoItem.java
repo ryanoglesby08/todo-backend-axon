@@ -6,16 +6,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ToDoItem {
     private String id;
     private String title;
-    private final boolean completed;
+    private boolean completed;
 
     @JsonCreator
-    public ToDoItem(@JsonProperty("title")  String title) {
+    public ToDoItem(@JsonProperty("title") String title, @JsonProperty("completed") boolean completed) {
         this.title = title;
-        this.completed = false;
+        this.completed = completed;
     }
 
     public ToDoItem(String id, String title) {
-        this(title);
+        this(title, false);
         this.id = id;
     }
 
@@ -32,4 +32,8 @@ public class ToDoItem {
     }
 
     public boolean isCompleted() { return completed; }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
 }

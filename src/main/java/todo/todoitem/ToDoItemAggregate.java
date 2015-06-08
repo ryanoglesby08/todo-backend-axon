@@ -18,13 +18,8 @@ public class ToDoItemAggregate extends AbstractAnnotatedAggregateRoot {
     }
 
     @CommandHandler
-    public void markCompleted(MarkCompletedCommand command) {
-        apply(new ToDoItemCompletedEvent(id));
-    }
-
-    @CommandHandler
-    public void updateTitle(UpdateToDoItemTitleCommand command) {
-        apply(new TodoItemTitleUpdatedEvent(id, command.getTitle()));
+    public void update(UpdateToDoItemCommand command) {
+        apply(new TodoItemUpdatedEvent(id, command.getTodoUpdates()));
     }
 
     @EventHandler

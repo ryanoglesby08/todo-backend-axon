@@ -3,9 +3,11 @@ package todo;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.async.DeferredResult;
 import todo.todoitem.CreateToDoItemCommand;
 import todo.todoitem.ToDoItem;
-import todo.todoitem.UpdateToDoItemTitleCommand;
+import todo.todoitem.UpdateToDoItemCommand;
+import todo.view.ToDoItemView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -19,11 +21,13 @@ public class ToDoController {
 
     private final CommandGateway commandGateway;
     private final TodoList list;
+    private final ToDoEventHandler eventHandler;
 
     @Autowired
-    public ToDoController(CommandGateway commandGateway, TodoList list) {
+    public ToDoController(CommandGateway commandGateway, TodoList list, ToDoEventHandler eventHandler) {
         this.commandGateway = commandGateway;
         this.list = list;
+        this.eventHandler = eventHandler;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -37,29 +41,34 @@ public class ToDoController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ToDoItemView create(@RequestBody ToDoItem todo, HttpServletRequest request) {
+    public DeferredResult<ToDoItemView> create(@RequestBody ToDoItem todo, HttpServletRequest request) {
+        DeferredResult<ToDoItemView> result = new DeferredResult<ToDoItemView>();
         String id = UUID.randomUUID().toString();
+
+        eventHandler.linkResultWithEvent(id, result);
         commandGateway.send(new CreateToDoItemCommand(id, todo.getTitle()));
 
-        todo.setId(id);
-        return ToDoItemView.build(todo, request);
+        return result;
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public String delete() {
+    public String clear() {
         list.clear();
         return "Deleted";
     }
 
     @RequestMapping(value = TODO_URL, method = RequestMethod.GET)
-    public ToDoItem show(@PathVariable String id) {
-        return list.get(id);
+    public ToDoItemView show(@PathVariable String id) {
+        return ToDoItemView.build(list.get(id));
     }
 
     @RequestMapping(value = TODO_URL, method = RequestMethod.PATCH)
-    public ToDoItem update(@PathVariable String id, @RequestBody ToDoItem todo) {
-        commandGateway.send(new UpdateToDoItemTitleCommand(id, todo.getTitle()));
+    public DeferredResult<ToDoItemView> update(@PathVariable String id, @RequestBody ToDoItem todoUpdates) {
+        DeferredResult<ToDoItemView> result = new DeferredResult<ToDoItemView>();
 
-        return null;
+        eventHandler.linkResultWithEvent(id, result);
+        commandGateway.send(new UpdateToDoItemCommand(id, todoUpdates));
+
+        return result;
     }
 }

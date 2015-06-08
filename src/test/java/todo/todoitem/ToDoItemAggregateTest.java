@@ -21,10 +21,10 @@ public class ToDoItemAggregateTest {
 
     }
 
-    @Test
-    public void markingToDoItemsAsCompleteEmitsCompletedEvents() throws Exception {
-        fixture.given(new ToDoItemCreatedEvent("1", "Learn Axon"))
-                .when(new MarkCompletedCommand("1"))
-                .expectEvents(new ToDoItemCompletedEvent("1"));
-    }
+//    @Test
+//    public void markingToDoItemsAsCompleteEmitsCompletedEvents() throws Exception {
+//        fixture.given(new ToDoItemCreatedEvent("1", "Learn Axon"))
+//                .when(new MarkCompletedCommand("1"))
+//                .expectEvents(new ToDoItemCompletedEvent("1"));
+//    }
 }

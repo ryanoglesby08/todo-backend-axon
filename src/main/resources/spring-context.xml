@@ -26,6 +26,4 @@
     <bean class="org.axonframework.commandhandling.gateway.CommandGatewayFactoryBean">
         <property name="commandBus" ref="commandBus"/>
     </bean>
-
-    <bean class="todo.TodoEventHandler" />
 </beans>
