@@ -24,4 +24,14 @@ public class TodoList {
     public void addItem(ToDoItemCreatedEvent event) {
         todos.add(new ToDoItem(event.getTodoId(), event.getTitle()));
     }
+
+    public ToDoItem get(String id) {
+        for (ToDoItem todo : todos) {
+            if(todo.getId().equals(id)) {
+                return todo;
+            }
+        }
+
+        return null;
+    }
 }

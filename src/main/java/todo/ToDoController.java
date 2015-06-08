@@ -3,10 +3,12 @@ package todo;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import todo.todoitem.CreateToDoItemCommand;
 import todo.todoitem.ToDoItem;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/todos")
@@ -21,23 +23,26 @@ public class ToDoController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
     public List<ToDoItem> index() {
-//        return items.get(0).getTitle();
-
         return list.all();
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseBody
-    public ToDoItem create(@RequestBody ToDoItem todoItem) {
-//        commandGateway.send(new CreateToDoItemCommand(UUID.randomUUID().toString(), "Learn Spring + Axon"));
-        return todoItem;
-//        return "Created";
+    public ToDoItemView create(@RequestBody ToDoItem todoItem, HttpServletRequest request) {
+        String id = UUID.randomUUID().toString();
+        commandGateway.send(new CreateToDoItemCommand(id, todoItem.getTitle()));
+
+        todoItem.setId(id);
+        return ToDoItemView.build(todoItem, request);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
     public String delete() {
         return "Deleted";
+    }
+
+    @RequestMapping(value="/{id}", method = RequestMethod.GET)
+    public ToDoItem show(@PathVariable String id) {
+        return list.get(id);
     }
 }
