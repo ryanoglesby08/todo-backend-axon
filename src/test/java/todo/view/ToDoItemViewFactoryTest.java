@@ -2,7 +2,7 @@ package todo.view;
 
 import org.junit.Before;
 import org.junit.Test;
-import todo.todoitem.ToDoItem;
+import todo.domain.ToDoItem;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

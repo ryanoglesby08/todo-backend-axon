@@ -1,7 +1,7 @@
-package todo;
+package todo.persistance;
 
 import org.springframework.stereotype.Service;
-import todo.todoitem.ToDoItem;
+import todo.domain.ToDoItem;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package todo.todoitem;
+package todo.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

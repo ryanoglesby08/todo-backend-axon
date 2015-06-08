@@ -1,14 +1,10 @@
-package todo.todoitem;
+package todo.domain;
 
-import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
-
-public class CreateToDoItemCommand {
-
-    @TargetAggregateIdentifier
+public class ToDoItemCreatedEvent {
     private final String todoId;
     private final ToDoItem todo;
 
-    public CreateToDoItemCommand(String todoId, ToDoItem todo) {
+    public ToDoItemCreatedEvent(String todoId, ToDoItem todo) {
         this.todoId = todoId;
         this.todo = todo;
     }

@@ -1,12 +1,12 @@
 package todo.view;
 
-import todo.todoitem.ToDoItem;
+import todo.domain.ToDoItem;
 
 public class ToDoItemView {
     private final ToDoItem todo;
     private final String todoUrl;
 
-    ToDoItemView(ToDoItem todo, String todoUrl) {
+    public ToDoItemView(ToDoItem todo, String todoUrl) {
         this.todo = todo;
         this.todoUrl = todoUrl;
     }

@@ -1,4 +1,4 @@
-package todo.todoitem;
+package todo.domain;
 
 import org.axonframework.test.FixtureConfiguration;
 import org.axonframework.test.Fixtures;

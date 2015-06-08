@@ -4,10 +4,11 @@ import org.axonframework.eventhandling.annotation.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.async.DeferredResult;
-import todo.todoitem.ToDoItem;
-import todo.todoitem.ToDoItemCreatedEvent;
-import todo.todoitem.ToDoItemDeletedEvent;
-import todo.todoitem.TodoItemUpdatedEvent;
+import todo.persistance.TodoList;
+import todo.domain.ToDoItem;
+import todo.domain.ToDoItemCreatedEvent;
+import todo.domain.ToDoItemDeletedEvent;
+import todo.domain.TodoItemUpdatedEvent;
 import todo.view.ToDoItemView;
 import todo.view.ToDoItemViewFactory;
 

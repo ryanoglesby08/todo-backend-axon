@@ -12,10 +12,10 @@
     <axon:event-bus id="eventBus"/>
 
     <axon:event-sourcing-repository id="toDoRepository"
-                                    aggregate-type="todo.todoitem.ToDoItemAggregate"/>
+                                    aggregate-type="todo.domain.ToDoItemAggregate"/>
 
     <axon:aggregate-command-handler id="toDoItemHandler"
-                                    aggregate-type="todo.todoitem.ToDoItemAggregate"
+                                    aggregate-type="todo.domain.ToDoItemAggregate"
                                     repository="toDoRepository"
                                     command-bus="commandBus"/>
 

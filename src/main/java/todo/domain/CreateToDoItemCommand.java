@@ -1,16 +1,23 @@
-package todo.todoitem;
+package todo.domain;
 
 import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
 
-public class DeleteToDoItemCommand {
+public class CreateToDoItemCommand {
+
     @TargetAggregateIdentifier
     private final String todoId;
+    private final ToDoItem todo;
 
-    public DeleteToDoItemCommand(String todoId) {
+    public CreateToDoItemCommand(String todoId, ToDoItem todo) {
         this.todoId = todoId;
+        this.todo = todo;
     }
 
     public String getTodoId() {
         return todoId;
+    }
+
+    public ToDoItem getTodo() {
+        return todo;
     }
 }

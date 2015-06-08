@@ -1,4 +1,4 @@
-package todo.todoitem;
+package todo.domain;
 
 public class ToDoItemDeletedEvent {
     private final String todoId;

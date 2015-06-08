@@ -4,10 +4,11 @@ import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
-import todo.todoitem.CreateToDoItemCommand;
-import todo.todoitem.DeleteToDoItemCommand;
-import todo.todoitem.ToDoItem;
-import todo.todoitem.UpdateToDoItemCommand;
+import todo.persistance.TodoList;
+import todo.domain.CreateToDoItemCommand;
+import todo.domain.DeleteToDoItemCommand;
+import todo.domain.ToDoItem;
+import todo.domain.UpdateToDoItemCommand;
 import todo.view.ToDoItemView;
 import todo.view.ToDoItemViewFactory;
 
@@ -35,13 +36,13 @@ public class ToDoController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<ToDoItemView> index(HttpServletRequest request) {
-        List<ToDoItemView> todos = new ArrayList<ToDoItemView>();
+    public List<ToDoItemView> index() {
+        List<ToDoItemView> todoViews = new ArrayList<ToDoItemView>();
         for (ToDoItem todo : list.all()) {
-            todos.add(toDoItemViewFactory.build(todo));
+            todoViews.add(toDoItemViewFactory.build(todo));
         }
 
-        return todos;
+        return todoViews;
     }
 
     @RequestMapping(method = RequestMethod.POST)
