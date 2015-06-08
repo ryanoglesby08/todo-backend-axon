@@ -7,6 +7,7 @@ import todo.todoitem.CreateToDoItemCommand;
 import todo.todoitem.ToDoItem;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,8 +24,13 @@ public class ToDoController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<ToDoItem> index() {
-        return list.all();
+    public List<ToDoItemView> index(HttpServletRequest request) {
+        List<ToDoItemView> todos = new ArrayList<ToDoItemView>();
+        for (ToDoItem todo : list.all()) {
+            todos.add(ToDoItemView.build(todo, request));
+        }
+
+        return todos;
     }
 
     @RequestMapping(method = RequestMethod.POST)
