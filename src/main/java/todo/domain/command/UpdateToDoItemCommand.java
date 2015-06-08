@@ -1,6 +1,7 @@
-package todo.domain;
+package todo.domain.command;
 
 import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
+import todo.domain.ToDoItem;
 
 public class UpdateToDoItemCommand {
 
@@ -11,10 +12,6 @@ public class UpdateToDoItemCommand {
     public UpdateToDoItemCommand(String todoId, ToDoItem todoUpdates) {
         this.todoId = todoId;
         this.todoUpdates = todoUpdates;
-    }
-
-    public String getTodoId() {
-        return todoId;
     }
 
     public ToDoItem getTodoUpdates() {

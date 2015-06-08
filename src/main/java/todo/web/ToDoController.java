@@ -1,18 +1,18 @@
-package todo;
+package todo.web;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
+import todo.ToDoEventHandler;
 import todo.persistance.TodoList;
-import todo.domain.CreateToDoItemCommand;
-import todo.domain.DeleteToDoItemCommand;
+import todo.domain.command.CreateToDoItemCommand;
+import todo.domain.command.DeleteToDoItemCommand;
 import todo.domain.ToDoItem;
-import todo.domain.UpdateToDoItemCommand;
+import todo.domain.command.UpdateToDoItemCommand;
 import todo.view.ToDoItemView;
 import todo.view.ToDoItemViewFactory;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

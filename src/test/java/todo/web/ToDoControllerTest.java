@@ -1,4 +1,4 @@
-package todo;
+package todo.web;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.Before;
@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import todo.ToDoEventHandler;
 import todo.domain.ToDoItem;
 import todo.persistance.TodoList;
 import todo.view.ToDoItemViewFactory;

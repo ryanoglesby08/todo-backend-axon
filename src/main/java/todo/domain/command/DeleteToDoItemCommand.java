@@ -1,4 +1,4 @@
-package todo.domain;
+package todo.domain.command;
 
 import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
 
@@ -8,9 +8,5 @@ public class DeleteToDoItemCommand {
 
     public DeleteToDoItemCommand(String todoId) {
         this.todoId = todoId;
-    }
-
-    public String getTodoId() {
-        return todoId;
     }
 }

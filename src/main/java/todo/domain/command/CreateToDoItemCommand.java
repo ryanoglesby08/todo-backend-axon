@@ -1,6 +1,7 @@
-package todo.domain;
+package todo.domain.command;
 
 import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
+import todo.domain.ToDoItem;
 
 public class CreateToDoItemCommand {
 

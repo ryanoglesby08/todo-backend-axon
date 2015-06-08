@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.async.DeferredResult;
 import todo.persistance.TodoList;
 import todo.domain.ToDoItem;
-import todo.domain.ToDoItemCreatedEvent;
-import todo.domain.ToDoItemDeletedEvent;
-import todo.domain.TodoItemUpdatedEvent;
+import todo.domain.event.ToDoItemCreatedEvent;
+import todo.domain.event.ToDoItemDeletedEvent;
+import todo.domain.event.TodoItemUpdatedEvent;
 import todo.view.ToDoItemView;
 import todo.view.ToDoItemViewFactory;
 

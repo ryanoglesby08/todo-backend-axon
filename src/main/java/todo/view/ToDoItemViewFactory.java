@@ -3,7 +3,7 @@ package todo.view;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import todo.ToDoController;
+import todo.web.ToDoController;
 import todo.domain.ToDoItem;
 
 @Component

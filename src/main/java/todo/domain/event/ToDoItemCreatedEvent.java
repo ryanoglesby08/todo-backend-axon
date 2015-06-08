@@ -1,4 +1,6 @@
-package todo.domain;
+package todo.domain.event;
+
+import todo.domain.ToDoItem;
 
 public class ToDoItemCreatedEvent {
     private final String todoId;
