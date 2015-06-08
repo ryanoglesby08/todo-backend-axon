@@ -9,6 +9,7 @@ import todo.todoitem.DeleteToDoItemCommand;
 import todo.todoitem.ToDoItem;
 import todo.todoitem.UpdateToDoItemCommand;
 import todo.view.ToDoItemView;
+import todo.view.ToDoUrlBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -23,19 +24,21 @@ public class ToDoController {
     private final CommandGateway commandGateway;
     private final TodoList list;
     private final ToDoEventHandler eventHandler;
+    private final ToDoUrlBuilder toDoUrlBuilder;
 
     @Autowired
-    public ToDoController(CommandGateway commandGateway, TodoList list, ToDoEventHandler eventHandler) {
+    public ToDoController(CommandGateway commandGateway, TodoList list, ToDoEventHandler eventHandler, ToDoUrlBuilder toDoUrlBuilder) {
         this.commandGateway = commandGateway;
         this.list = list;
         this.eventHandler = eventHandler;
+        this.toDoUrlBuilder = toDoUrlBuilder;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public List<ToDoItemView> index(HttpServletRequest request) {
         List<ToDoItemView> todos = new ArrayList<ToDoItemView>();
         for (ToDoItem todo : list.all()) {
-            todos.add(ToDoItemView.build(todo, request));
+            todos.add(ToDoItemView.build(todo, toDoUrlBuilder));
         }
 
         return todos;
@@ -60,7 +63,7 @@ public class ToDoController {
 
     @RequestMapping(value = TODO_URL, method = RequestMethod.GET)
     public ToDoItemView show(@PathVariable String id) {
-        return ToDoItemView.build(list.get(id));
+        return ToDoItemView.build(list.get(id), toDoUrlBuilder);
     }
 
     @RequestMapping(value = TODO_URL, method = RequestMethod.PATCH)
