@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import todo.todoitem.CreateToDoItemCommand;
 import todo.todoitem.ToDoItem;
+import todo.todoitem.UpdateToDoItemTitleCommand;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/todos")
 public class ToDoController {
+    public static final String TODO_URL = "/{id}";
+
     private final CommandGateway commandGateway;
     private final TodoList list;
 
@@ -34,12 +37,12 @@ public class ToDoController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ToDoItemView create(@RequestBody ToDoItem todoItem, HttpServletRequest request) {
+    public ToDoItemView create(@RequestBody ToDoItem todo, HttpServletRequest request) {
         String id = UUID.randomUUID().toString();
-        commandGateway.send(new CreateToDoItemCommand(id, todoItem.getTitle()));
+        commandGateway.send(new CreateToDoItemCommand(id, todo.getTitle()));
 
-        todoItem.setId(id);
-        return ToDoItemView.build(todoItem, request);
+        todo.setId(id);
+        return ToDoItemView.build(todo, request);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
@@ -48,8 +51,15 @@ public class ToDoController {
         return "Deleted";
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = TODO_URL, method = RequestMethod.GET)
     public ToDoItem show(@PathVariable String id) {
         return list.get(id);
+    }
+
+    @RequestMapping(value = TODO_URL, method = RequestMethod.PATCH)
+    public ToDoItem update(@PathVariable String id, @RequestBody ToDoItem todo) {
+        commandGateway.send(new UpdateToDoItemTitleCommand(id, todo.getTitle()));
+
+        return null;
     }
 }

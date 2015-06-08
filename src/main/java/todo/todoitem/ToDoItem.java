@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ToDoItem {
     private String id;
-    private final String title;
+    private String title;
     private final boolean completed;
 
     @JsonCreator
@@ -25,6 +25,10 @@ public class ToDoItem {
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public boolean isCompleted() { return completed; }

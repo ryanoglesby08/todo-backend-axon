@@ -4,6 +4,7 @@ import org.axonframework.eventhandling.annotation.EventHandler;
 import org.springframework.stereotype.Service;
 import todo.todoitem.ToDoItem;
 import todo.todoitem.ToDoItemCreatedEvent;
+import todo.todoitem.TodoItemTitleUpdatedEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +21,6 @@ public class TodoList {
         return todos;
     }
 
-    @EventHandler
-    public void addItem(ToDoItemCreatedEvent event) {
-        todos.add(new ToDoItem(event.getTodoId(), event.getTitle()));
-    }
-
     public ToDoItem get(String id) {
         for (ToDoItem todo : todos) {
             if(todo.getId().equals(id)) {
@@ -37,5 +33,16 @@ public class TodoList {
 
     public void clear() {
         todos.clear();
+    }
+
+    @EventHandler
+    public void addItem(ToDoItemCreatedEvent event) {
+        todos.add(new ToDoItem(event.getTodoId(), event.getTitle()));
+    }
+
+    @EventHandler
+    public void updateItemTitle(TodoItemTitleUpdatedEvent event) {
+        ToDoItem todo = get(event.getTodoId());
+        todo.setTitle(event.getTitle());
     }
 }

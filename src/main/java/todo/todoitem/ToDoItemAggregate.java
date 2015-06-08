@@ -22,6 +22,11 @@ public class ToDoItemAggregate extends AbstractAnnotatedAggregateRoot {
         apply(new ToDoItemCompletedEvent(id));
     }
 
+    @CommandHandler
+    public void updateTitle(UpdateToDoItemTitleCommand command) {
+        apply(new TodoItemTitleUpdatedEvent(id, command.getTitle()));
+    }
+
     @EventHandler
     public void on(ToDoItemCreatedEvent event) {
         this.id = event.getTodoId();
