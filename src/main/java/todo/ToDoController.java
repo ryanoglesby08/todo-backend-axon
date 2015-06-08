@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import todo.todoitem.ToDoItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,10 +21,11 @@ public class ToDoController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String index() {
-        List<ToDoItem> items = list.all();
+    @ResponseBody
+    public List<ToDoItem> index() {
+//        return items.get(0).getTitle();
 
-        return items.get(0).getTitle();
+        return list.all();
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -32,5 +34,10 @@ public class ToDoController {
 //        commandGateway.send(new CreateToDoItemCommand(UUID.randomUUID().toString(), "Learn Spring + Axon"));
         return todoItem;
 //        return "Created";
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    public String delete() {
+        return "Deleted";
     }
 }
