@@ -15,9 +15,10 @@ public class ToDoItemAggregateTest {
 
     @Test
     public void creatingTodoItemsEmitsCreatedEvents() throws Exception {
+        ToDoItem todo = new ToDoItem("1", false, 2);
         fixture.given()
-                .when(new CreateToDoItemCommand("1", "Learn Axon"))
-                .expectEvents(new ToDoItemCreatedEvent("1", "Learn Axon"));
+                .when(new CreateToDoItemCommand("1", todo))
+                .expectEvents(new ToDoItemCreatedEvent("1", todo));
 
     }
 
