@@ -9,7 +9,7 @@ import todo.todoitem.DeleteToDoItemCommand;
 import todo.todoitem.ToDoItem;
 import todo.todoitem.UpdateToDoItemCommand;
 import todo.view.ToDoItemView;
-import todo.view.ToDoUrlBuilder;
+import todo.view.ToDoItemViewFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -24,21 +24,21 @@ public class ToDoController {
     private final CommandGateway commandGateway;
     private final TodoList list;
     private final ToDoEventHandler eventHandler;
-    private final ToDoUrlBuilder toDoUrlBuilder;
+    private final ToDoItemViewFactory toDoItemViewFactory;
 
     @Autowired
-    public ToDoController(CommandGateway commandGateway, TodoList list, ToDoEventHandler eventHandler, ToDoUrlBuilder toDoUrlBuilder) {
+    public ToDoController(CommandGateway commandGateway, TodoList list, ToDoEventHandler eventHandler, ToDoItemViewFactory toDoItemViewFactory) {
         this.commandGateway = commandGateway;
         this.list = list;
         this.eventHandler = eventHandler;
-        this.toDoUrlBuilder = toDoUrlBuilder;
+        this.toDoItemViewFactory = toDoItemViewFactory;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public List<ToDoItemView> index(HttpServletRequest request) {
         List<ToDoItemView> todos = new ArrayList<ToDoItemView>();
         for (ToDoItem todo : list.all()) {
-            todos.add(ToDoItemView.build(todo, toDoUrlBuilder));
+            todos.add(toDoItemViewFactory.build(todo));
         }
 
         return todos;
@@ -63,7 +63,7 @@ public class ToDoController {
 
     @RequestMapping(value = TODO_URL, method = RequestMethod.GET)
     public ToDoItemView show(@PathVariable String id) {
-        return ToDoItemView.build(list.get(id), toDoUrlBuilder);
+        return toDoItemViewFactory.build(list.get(id));
     }
 
     @RequestMapping(value = TODO_URL, method = RequestMethod.PATCH)

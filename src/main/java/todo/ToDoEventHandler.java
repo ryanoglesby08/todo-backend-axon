@@ -9,7 +9,7 @@ import todo.todoitem.ToDoItemCreatedEvent;
 import todo.todoitem.ToDoItemDeletedEvent;
 import todo.todoitem.TodoItemUpdatedEvent;
 import todo.view.ToDoItemView;
-import todo.view.ToDoUrlBuilder;
+import todo.view.ToDoItemViewFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,14 +18,14 @@ import java.util.Map;
 public class ToDoEventHandler {
 
     private final TodoList todos;
-    private final ToDoUrlBuilder toDoUrlBuilder;
+    private final ToDoItemViewFactory toDoItemViewFactory;
     private Map<String, DeferredResult<ToDoItemView>> httpResults;
 
     @Autowired
-    public ToDoEventHandler(TodoList todos, ToDoUrlBuilder toDoUrlBuilder) {
+    public ToDoEventHandler(TodoList todos, ToDoItemViewFactory toDoItemViewFactory) {
         this.todos = todos;
-        this.toDoUrlBuilder = toDoUrlBuilder;
-        httpResults = new HashMap<String, DeferredResult<ToDoItemView>>();
+        this.toDoItemViewFactory = toDoItemViewFactory;
+        this.httpResults = new HashMap<String, DeferredResult<ToDoItemView>>();
     }
 
     public void linkResultWithEvent(String todoId, DeferredResult<ToDoItemView> result) {
@@ -74,7 +74,7 @@ public class ToDoEventHandler {
 
     private void finishHttpRequestFor(ToDoItem todo) {
         DeferredResult<ToDoItemView> result = httpResults.get(todo.getId());
-        result.setResult(ToDoItemView.build(todo, toDoUrlBuilder));
+        result.setResult(toDoItemViewFactory.build(todo));
 
         httpResults.remove(todo.getId());
     }
