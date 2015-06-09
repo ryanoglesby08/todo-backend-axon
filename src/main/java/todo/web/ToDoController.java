@@ -50,6 +50,8 @@ public class ToDoController {
         DeferredResult<ToDoItemView> result = new DeferredResult<ToDoItemView>();
         String id = UUID.randomUUID().toString();
 
+        todo.setCompleted(false);
+
         eventHandler.linkResultWithEvent(id, result);
         commandGateway.send(new CreateToDoItemCommand(id, todo));
 

@@ -53,8 +53,10 @@ public class ToDoEventHandler {
             todo.setTitle(title);
         }
 
-        boolean completed = updates.isCompleted();
-        todo.setCompleted(completed);
+        Boolean completed = updates.isCompleted();
+        if( completed != null ) {
+            todo.setCompleted(completed);
+        }
 
         Integer order = updates.getOrder();
         if( order != null ) {

@@ -77,7 +77,7 @@ public class ToDoControllerTest {
 
     @Test
     public void create_issuesACommandToCreateATodo() throws Exception {
-        ToDoItem todo = new ToDoItem("do something", false, 1);
+        ToDoItem todo = new ToDoItem("do something", null, 1);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String todoJson = objectMapper.writeValueAsString(todo);

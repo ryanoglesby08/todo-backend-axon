@@ -19,7 +19,7 @@ public class ToDoItemView {
         return todo.getTitle();
     }
 
-    public boolean isCompleted() {
+    public Boolean isCompleted() {
         return todo.isCompleted();
     }
 
