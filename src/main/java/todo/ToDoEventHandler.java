@@ -45,8 +45,6 @@ public class ToDoEventHandler {
 
     @EventHandler
     public void handle(TodoItemUpdatedEvent event) {
-        System.out.println("Updated! " + event.getTodoId());
-
         ToDoItem todo = todos.get(event.getTodoId());
         ToDoItem updates = event.getTodoUpdates();
 
