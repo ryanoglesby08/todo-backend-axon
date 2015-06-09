@@ -59,7 +59,7 @@ public class ToDoController {
     @RequestMapping(method = RequestMethod.DELETE)
     public String clear() {
         list.clear();
-        return "Deleted";
+        return "Deleted all todos";
     }
 
     @RequestMapping(value = TODO_URL, method = RequestMethod.GET)
